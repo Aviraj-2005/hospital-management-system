@@ -12,6 +12,7 @@ A full-featured Hospital Management System  **Django + SQLite**.
 - 🎨 Same original UI/CSS — pixel-perfect conversion
 
 ---
+## Live : https://hospital-management-system-ax6c.onrender.com
 
 ## Setup & Run
 
@@ -77,4 +78,9 @@ hospital_django/
     │   ├── appointments.html
     │   └── add_appointment.html
     └── static/hospital/
-        └── style.css              # Original CSS (unchanged)```
+        └── style.css              # Original CSS
+
+
+
+
+
