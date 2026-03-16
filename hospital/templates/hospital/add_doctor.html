@@ -1,0 +1,48 @@
+{% extends 'hospital/base.html' %}
+{% block title %}Add Doctor{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-bottom:40px;">
+
+    <div class="page-header">
+        <h2>Add New Doctor</h2>
+        <a href="{% url 'doctors' %}" class="btn btn-danger">← Back</a>
+    </div>
+
+    <form method="POST" action="{% url 'add_doctor' %}">
+        {% csrf_token %}
+
+        <div class="form-row">
+            <div>
+                <label for="id_name">Doctor Name *</label>
+                {{ form.name }}
+            </div>
+            <div>
+                <label for="id_specialization">Specialization *</label>
+                {{ form.specialization }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div>
+                <label for="id_phone">Phone Number</label>
+                {{ form.phone }}
+            </div>
+            <div>
+                <label for="id_email">Email</label>
+                {{ form.email }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div>
+                <label for="id_experience">Years of Experience</label>
+                {{ form.experience }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn-success">Add Doctor</button>
+    </form>
+
+</div>
+{% endblock %}

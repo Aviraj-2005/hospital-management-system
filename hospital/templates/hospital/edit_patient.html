@@ -1,0 +1,52 @@
+{% extends 'hospital/base.html' %}
+{% block title %}Edit Patient{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-bottom:40px;">
+
+    <div class="page-header">
+        <h2>Edit Patient — {{ patient.name }}</h2>
+        <a href="{% url 'patients' %}" class="btn btn-danger">← Back</a>
+    </div>
+
+    <form method="POST" action="{% url 'edit_patient' patient.id %}">
+        {% csrf_token %}
+
+        <div class="form-row">
+            <div>
+                <label for="id_name">Patient Name *</label>
+                {{ form.name }}
+            </div>
+            <div>
+                <label for="id_age">Age *</label>
+                {{ form.age }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div>
+                <label for="id_gender">Gender *</label>
+                {{ form.gender }}
+            </div>
+            <div>
+                <label for="id_blood_group">Blood Group</label>
+                {{ form.blood_group }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div>
+                <label for="id_disease">Disease / Condition *</label>
+                {{ form.disease }}
+            </div>
+            <div>
+                <label for="id_phone">Phone Number</label>
+                {{ form.phone }}
+            </div>
+        </div>
+
+        <button type="submit">Update Patient</button>
+    </form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hospital Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'hospital/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>🏥 Hospital Management</h2>
+    <div>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'patients' %}">Patients</a>
+        <a href="{% url 'doctors' %}">Doctors</a>
+        <a href="{% url 'appointments' %}">Appointments</a>
+        {% if user.is_authenticated %}
+            <span style="color:rgba(255,255,255,0.7); margin-left:20px;">👤 {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- FLASH MESSAGES -->
+{% if messages %}
+<div class="flash-messages">
+    {% for message in messages %}
+    <div class="flash {{ message.tags }}">
+        {{ message }}
+        <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- PAGE CONTENT -->
+{% block content %}{% endblock %}
+
+<!-- FOOTER -->
+<div class="footer">
+    &copy; 2025 Hospital Management System — All Rights Reserved
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends 'hospital/base.html' %}
+{% block title %}Patients — Hospital Management{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-bottom:30px;">
+
+    <div class="page-header">
+        <h2>Patient List</h2>
+        <a href="{% url 'add_patient' %}" class="btn">+ Add Patient</a>
+    </div>
+
+    <form class="search-form" method="GET" action="{% url 'patients' %}">
+        <input type="text" name="search" placeholder="Search by name or disease..." value="{{ search }}">
+        <button type="submit">Search</button>
+        {% if search %}
+            <a href="{% url 'patients' %}" class="btn btn-danger">Clear</a>
+        {% endif %}
+    </form>
+
+    {% if patients %}
+    <table>
+        <tr>
+            <th>#</th><th>Name</th><th>Age</th><th>Gender</th><th>Disease</th>
+            <th>Phone</th><th>Blood Group</th><th>Admitted On</th><th>Actions</th>
+        </tr>
+        {% for p in patients %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td><strong>{{ p.name }}</strong></td>
+            <td>{{ p.age }}</td>
+            <td>{{ p.gender }}</td>
+            <td>{{ p.disease }}</td>
+            <td>{{ p.phone }}</td>
+            <td>{{ p.blood_group }}</td>
+            <td>{{ p.admitted_on }}</td>
+            <td>
+                <div class="action-btns">
+                    <a href="{% url 'edit_patient' p.id %}" class="btn btn-success btn-sm">Edit</a>
+                    <a href="{% url 'delete_patient' p.id %}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this patient?')">Delete</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <div class="empty-state">
+        {% if search %}No patients found for "{{ search }}".{% else %}No patients added yet.{% endif %}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

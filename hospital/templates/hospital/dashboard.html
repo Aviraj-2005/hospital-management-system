@@ -1,0 +1,59 @@
+{% extends 'hospital/base.html' %}
+{% block title %}Dashboard — Hospital Management{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-bottom:20px;">
+
+    <div class="section-title" style="margin-top:25px;">Overview</div>
+    <div class="dashboard">
+        <div class="card">
+            <h3>Total Patients</h3>
+            <p>{{ stats.patients }}</p>
+            <a href="{% url 'patients' %}" class="btn btn-sm" style="margin-top:10px;">View All</a>
+        </div>
+        <div class="card green">
+            <h3>Total Doctors</h3>
+            <p>{{ stats.doctors }}</p>
+            <a href="{% url 'doctors' %}" class="btn btn-success btn-sm" style="margin-top:10px;">View All</a>
+        </div>
+        <div class="card orange">
+            <h3>Total Appointments</h3>
+            <p>{{ stats.appointments }}</p>
+            <a href="{% url 'appointments' %}" class="btn btn-warning btn-sm" style="margin-top:10px;">View All</a>
+        </div>
+        <div class="card red">
+            <h3>Today's Appointments</h3>
+            <p>{{ stats.today }}</p>
+            <a href="{% url 'appointments' %}" class="btn btn-danger btn-sm" style="margin-top:10px;">View</a>
+        </div>
+    </div>
+
+    <div class="section-title">Recent Appointments</div>
+    {% if recent %}
+    <table>
+        <tr>
+            <th>#</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Status</th>
+        </tr>
+        {% for row in recent %}
+        <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.patient.name }}</td>
+            <td>{{ row.doctor.name }}</td>
+            <td>{{ row.date }}</td>
+            <td><span class="badge badge-{{ row.status|lower }}">{{ row.status }}</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <div class="empty-state">No appointments yet. <a href="{% url 'add_appointment' %}">Book one now.</a></div>
+    {% endif %}
+
+    <div class="section-title">Quick Actions</div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:30px;">
+        <a href="{% url 'add_patient' %}" class="btn">+ Add Patient</a>
+        <a href="{% url 'add_doctor' %}" class="btn btn-success">+ Add Doctor</a>
+        <a href="{% url 'add_appointment' %}" class="btn btn-warning">+ Book Appointment</a>
+    </div>
+
+</div>
+{% endblock %}
