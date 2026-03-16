@@ -1,6 +1,7 @@
+
 # 🏥 Hospital Management System — Django
 
-A full-featured Hospital Management System converted from Flask + MySQL to **Django + SQLite**.
+A full-featured Hospital Management System  **Django + SQLite**.
 
 ## Features
 - 🔐 User Authentication (Login, Register, Logout)
@@ -76,21 +77,4 @@ hospital_django/
     │   ├── appointments.html
     │   └── add_appointment.html
     └── static/hospital/
-        └── style.css              # Original CSS (unchanged)
-```
-
----
-
-## Flask → Django Changes
-
-| Flask | Django Equivalent |
-|-------|------------------|
-| `mysql-connector` | Django ORM + SQLite |
-| `session['user_id']` | `request.user` (Django auth) |
-| `flash(msg, 'success')` | `messages.success(request, msg)` |
-| `url_for('view_name')` | `{% url 'name' %}` |
-| `@login_required` decorator | `@login_required` decorator |
-| Raw SQL queries | Django QuerySet ORM |
-| `db.py` | `models.py` + migrations |
-| `app.py` | `views.py` + `urls.py` |
-| SHA-256 password hashing | Django's built-in PBKDF2 hashing |
+        └── style.css              # Original CSS (unchanged)```
